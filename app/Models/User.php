@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,14 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
+    /**
+     * Trait usage for role-based access control.
+     *
+     * The `HasRoles` trait is included in this model to provide methods and properties
+     * for managing user roles and permissions. This allows the application to assign
+     * roles to users and check their permissions, facilitating role-based access control.
+     */
 
     /**
      * The attributes that are mass assignable.
@@ -61,5 +70,19 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    //Relacion muchos a muchos
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'idHotel', 'idHotel');
     }
 }

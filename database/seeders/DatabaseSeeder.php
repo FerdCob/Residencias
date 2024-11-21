@@ -13,11 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Luis Fernando Coboj Olivarez',
+            'email' => 'cobojolivarezfernando@gmail.com',
+            'password' => bcrypt('fernando@@2002')
         ]);
+        \App\Models\User::factory(50)->create();
+        \App\Models\Category::factory(5)->create();
+        \App\Models\Post::factory(1)->create();
+        $this->call(TagSeeder::class);
+        // User::factory(10)->create();
     }
 }

@@ -95,57 +95,64 @@ class FormularioController extends Controller
      */
     public function store(Request $request, FormValidationService $validationService)
     {
-
         // Validar los datos usando el servicio
         $validationService->validateStoreRequest($request->all());
 
-        //return $request->all();
-        DB::beginTransaction();
-        try {
-            // Llamada al servicio para preparar los datos, descomentar al finalizar la implementación
-            $insert_data = $this->GentotalService->prepararDatosResiduos($request); // Inserción en la base de datos
-            SeccionGeneracion1::insert($insert_data); // Descomenta esta línea si deseas insertar los datos en la base de datos
-            // return $insert_data;
-
-            $insert_personal = $this->PersonService->prepararDatosPersona($request); // Inserción en la base de datos
-            SeccionCantidad2::insert($insert_personal); // Descomenta esta línea si deseas insertar los datos en la base de datos
-            // return $insert_personal;
-
-            $insert_percapita = $this->PercapitaService->prepararDatosPercapita($request); // Inserción en la base de datos
-            SeccionTotal2::insert($insert_percapita); // Descomenta esta línea si deseas insertar los datos en la base de datos
-            //return $insert_percapita;
-
-            $insert_subproductos = $this->SubproductoService->prepararDatosSubproductos($request); // Inserción en la base de datos
-            SeccionValorsub3::insert($insert_subproductos); // Descomenta esta línea si deseas insertar los datos en la base de datos
-            // return $insert_subproductos;
-
-            $insert_noValor = $this->NovalorService->prepararDatosNovalor($request); // Inserción en la base de datos
-            //return $insert_noValor;
-            SeccionVolumetrico4::insert($insert_noValor); // Descomenta esta línea si deseas insertar los datos en la base de datos
-
-            $insert_Sec5 = $this->ValorSec5Service->prepararDatosValor($request); // Inserción en la base de datos
-            //return $insert_data;
-            SeccionVolumetrico5::insert($insert_Sec5); // Descomenta esta línea si deseas insertar los datos en la base de datos
-
-            $insert_valorizable = $this->ValorizablesService->prepararDatosValorizable($request); // Inserción en la base de datos
-            //return $insert_valorizable;
-            SeccionValorizables::insert($insert_valorizable); // Descomenta esta línea si deseas insertar los datos en la base de datos
-
-            // Confirma la transacción
-            DB::commit();
-
+        // Verificar que el usuario tenga un hotel asociado
+        $idHotel = Auth::user()->hotel->idHotel ?? null;
+        if (!$idHotel) {
             session()->flash('swal', [
-                'title' => 'Registro creado',
-                'text' => 'El registro se ha creado correctamente',
-                'icon' => 'success'
+                'title' => 'Error',
+                'text' => 'El usuario no tiene un hotel asignado.',
+                'icon' => 'error'
             ]);
             return redirect()->route('admin.forms.index');
-        } catch (\Exception $e) {
-            // En caso de error, se cancela la transacción
-            DB::rollback();
-            return redirect()->back()->withErrors('Error en la inserción de datos.');
         }
+
+        // Verificar si ya existe un registro para la misma fecha y hotel
+        $existeRegistro = SeccionGeneracion1::where('fecha', $request->fecha)
+            ->where('idHotel', $idHotel)
+            ->exists();
+
+        session()->flash('swal', [
+            'title' => $existeRegistro ? 'Registro duplicado' : 'Registro creado',
+            'text' => $existeRegistro
+                ? 'Ya existe un registro para este hotel en la fecha seleccionada.'
+                : 'El registro se ha creado correctamente.',
+            'icon' => $existeRegistro ? 'error' : 'success',
+        ]);
+
+        if ($existeRegistro) {
+            return redirect()->route('admin.forms.index');
+        }
+
+        // Inicia la transacción
+        DB::transaction(function () use ($request) {
+            $insert_data = $this->GentotalService->prepararDatosResiduos($request);
+            SeccionGeneracion1::insert($insert_data);
+
+            $insert_personal = $this->PersonService->prepararDatosPersona($request);
+            SeccionCantidad2::insert($insert_personal);
+
+            $insert_percapita = $this->PercapitaService->prepararDatosPercapita($request);
+            SeccionTotal2::insert($insert_percapita);
+
+            $insert_subproductos = $this->SubproductoService->prepararDatosSubproductos($request);
+            SeccionValorsub3::insert($insert_subproductos);
+
+            $insert_noValor = $this->NovalorService->prepararDatosNovalor($request);
+            SeccionVolumetrico4::insert($insert_noValor);
+
+            $insert_Sec5 = $this->ValorSec5Service->prepararDatosValor($request);
+            SeccionVolumetrico5::insert($insert_Sec5);
+
+            $insert_valorizable = $this->ValorizablesService->prepararDatosValorizable($request);
+            SeccionValorizables::insert($insert_valorizable);
+        });
+
+        return redirect()->route('admin.forms.index');
     }
+
 
     /**
      * Display the specified resource.

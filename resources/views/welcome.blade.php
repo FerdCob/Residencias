@@ -2,14 +2,13 @@
 
     <figure class="mb-12">
         <img src="{{ asset('img/home/portada.jpeg') }}" alt="Portada del Home"
-            class="w-full aspect[3/1] object-cover object-center">
+            class="w-full aspect-[6/1] object-cover object-center">
     </figure>
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <h1 class="text-3xl text-center font-semibold mb-6">
             Lista de Articulos
         </h1>
-        {{-- d --}}
-        i categoria ==! "" undefined null else categoria == post == consulta base de datos
+        {{--   i categoria ==! "" undefined null else categoria == post == consulta base de datosd --}}
         <div class="grid grid-cols-4">
             <div class="col-span-1">
                 <form action="{{ route('home') }}">
@@ -18,7 +17,7 @@
                             Ordenar por:
                         </p>
                         <select name="order"
-                            class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            class="border-gray-300 dark:border-gray-700 :bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             <option value="new">Más recientes</option>
                             <option value="old" @selected(request('order') == 'old')>Más antiguos</option>
                         </select>
@@ -41,7 +40,7 @@
                                     </li>
                                 @endforeach
                             @else
-                                $category = []
+                                {{-- $category = [] --}}
                                 @foreach ($categories as $category)
                                     <li>
                                         <label>

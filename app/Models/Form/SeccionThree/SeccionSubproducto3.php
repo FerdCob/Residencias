@@ -11,4 +11,6 @@ class SeccionSubproducto3 extends Model
     protected $table = 'subproductos';  // Nombre de tu tabla en la base de datos
     protected $primaryKey = 'id_subproducto'; // Nombre de la clave primaria
     public $timestamps = false; // Desactiva el uso de timestamps
+
+
 }

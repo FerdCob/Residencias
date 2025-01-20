@@ -11,4 +11,9 @@ class SeccionValorsub3 extends Model
     protected $table = 'sec3valsub';  // Nombre de tu tabla en la base de datos
     protected $primaryKey = 'id_valorsubproducto'; // Nombre de la clave primaria
     public $timestamps = false; // Desactiva el uso de timestamps
+
+    public function sec3subpro()
+    {
+        return $this->belongsTo(SeccionSubproducto3::class, 'id_subproductos', 'id_subproducto');
+    }
 }

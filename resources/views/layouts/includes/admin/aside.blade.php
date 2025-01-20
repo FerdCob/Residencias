@@ -78,6 +78,13 @@
             'icon' => 'fa-solid fa-chart-line',
             //'can' => ['Gestion evidencias'],
         ],
+        [
+            'name' => 'Predicciones',
+            'url' => route('admin.predicciones.index'),
+            'active' => request()->routeIs('admin.predicciones.*'),
+            'icon' => 'fa-solid fa-cog',
+            // 'can' => ['Gestion configuracion'],
+        ],
     ];
 @endphp
 
@@ -93,7 +100,7 @@
                 @canany($link['can'] ?? [null])
                     <li>
                         <a href="{{ $link['url'] }}"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ $link['active'] ? 'bg-gray-100' : '' }}">
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ $link['active'] ? 'bg-gray-600' : '' }}">
                             <i class="fas {{ $link['icon'] }} text-grayu-600"></i>
                             <span class="ms-3">
                                 {{ $link['name'] }}

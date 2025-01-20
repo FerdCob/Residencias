@@ -12,6 +12,9 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 //     return view('welcome');
 // })->name('home');
 
+// Route::get('storage-link', function () {
+//     Artisan::call('storage:link');
+// })->name('.');
 
 Route::middleware([
     'auth',

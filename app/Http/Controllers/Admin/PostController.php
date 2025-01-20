@@ -75,12 +75,13 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Post $post)
-    {   // Sintaxis en laravel 10 sirve para validar si el usuario es el autor del post y mandar un error y puedo agregar quien esta intentando entrar        // if (!Gate::allows('author', $post)) {
-        //     return abort(403, 'NO ESTAS AUTORIZADO');
-        // }
+    {   // Sintaxis en laravel 10 sirve para validar si el usuario es el autor del post y mandar un error y puedo agregar quien esta intentando entrar
+        if (!Gate::allows('authorPost', $post)) {
+            return abort(403, 'NO ESTAS AUTORIZADO');
+        }
         //return $post;
         //Sintaxis en laravel 11 sirve para validar si el usuario es el autor del post y solo mandar un error
-        Gate::authorize('author', $post);
+        //Gate::authorize('author', $post);
 
         $categories = Category::all();
 

@@ -7,8 +7,8 @@ use App\Models\User;
 
 class PostPolicy
 {
-    public function author(User $user, Post $post): bool
+    public function authorPost(User $user, Post $post): bool
     {
-        return $user->id === $post->user_id;
+        return (int)$user->id === (int)$post->user_id;
     }
 }

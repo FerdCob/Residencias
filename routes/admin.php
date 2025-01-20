@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\GraficasController;
 use App\Http\Controllers\Admin\HotelController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PrediccionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SubproductoController;
 use App\Http\Controllers\Admin\UserController;
@@ -58,4 +59,7 @@ Route::resource('forms', FormularioController::class)
 
 Route::resource('graficas', GraficasController::class);
 // Ruta adicional para obtener datos en JSON
-Route::get('graficas/datos', [GraficasController::class, 'obtenerDatos'])->name('graficas.datos');
+//Route::get('graficas/datos', [GraficasController::class, 'obtenerDatos'])->name('graficas.datos');
+
+Route::resource('predicciones', PrediccionController::class);
+//Route::get('/admin/predicciones/datos', [PrediccionController::class, 'getDatos'])->name('predicciones.datos');

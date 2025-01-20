@@ -15,6 +15,8 @@
     <!-- Fonts Awesome -->
     <script src="https://kit.fontawesome.com/27a9fd3a86.js" crossorigin="anonymous"></script>
 
+    {{-- <link rel="stylesheet" href="build/assets/app-RSosmjp_.css">
+    <script src="build/assets/app-CEsE5a7F.js" defer></script> --}}
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -25,7 +27,7 @@
 <body class="font-sans antialiased">
     <x-banner />
 
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-100">
         @livewire('navigation-menu')
 
         <!-- Page Heading -->

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\Form;
+namespace App\Models\Form\SeccionOne;
 
+use App\Models\Form\SeccionOne\SeccionGeneracion1;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,4 +12,6 @@ class SeccionNombre1 extends Model
     protected $table = 'sec1t_residuo';  // Nombre de tu tabla en la base de datos
     protected $primaryKey = 'id_residuo'; // Nombre de la clave primaria
     public $timestamps = false; // Desactiva el uso de timestamps
+
+
 }

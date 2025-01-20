@@ -17,8 +17,10 @@
     <script src="https://kit.fontawesome.com/27a9fd3a86.js" crossorigin="anonymous"></script>
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Chart Js-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    {{-- <link rel="stylesheet" href="build/assets/app-RSosmjp_.css">
+    <script src="build/assets/app-CEsE5a7F.js" defer></script> --}}
+
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

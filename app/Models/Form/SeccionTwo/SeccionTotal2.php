@@ -11,4 +11,6 @@ class SeccionTotal2 extends Model
     protected $table = 'sec2pervtotal';  // Nombre de tu tabla en la base de datos
     protected $primaryKey = 'id_valor_percapita_total'; // Nombre de la clave primaria
     public $timestamps = false; // Desactiva el uso de timestamps
+
+
 }

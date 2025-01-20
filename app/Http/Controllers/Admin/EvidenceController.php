@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+//use Iluminate\Support\Fecades\AutorizesRequests;
+
+
+
 
 class EvidenceController extends Controller
 {
@@ -78,8 +83,8 @@ class EvidenceController extends Controller
      */
     public function edit(Evidence $evidencia)
     {
-        Gate::authorize('author', $evidencia);
-
+        Gate::authorize('authorEvidence', $evidencia);
+        //$this->authorize('authorEvidence', $evidence);
         // return $evidencia;
         //$evidence = Evidence::find($id); // Buscar la evidencia manualmente usando el ID
         // return $evidence; // Devuelve para comprobar si el objeto es correcto

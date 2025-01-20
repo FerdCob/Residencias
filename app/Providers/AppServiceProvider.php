@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Evidence;
 use App\Models\Post;
+use App\Models\User;
 use App\Observers\EvidenceObserver;
 use Illuminate\Support\ServiceProvider;
 use App\Observers\PostObserver;
@@ -32,5 +33,12 @@ class AppServiceProvider extends ServiceProvider
         Gate::after(function ($user, $ability) {
             return $user->hasRole('Super Administrador') ? true : null;
         });
+
+        // Gate::define('authorPost', function ($user, $post) {
+        //     return $user->id === $post->user_id;
+        // });
+        // Gate::define('authorEvidence', function (User $user, Evidence  $evidencia) {
+        //     return $user->hotel->idHotel === $evidencia->id_hotel;
+        // });
     }
 }

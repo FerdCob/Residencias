@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <figure class="mb-12">
-        <img src="{{ asset('img/home/portada.jpeg') }}" alt="Portada del Home"
+        <img src="{{ asset('img/home/portada.jpg') }}" alt="Portada del Home"
             class="w-full aspect-[6/1] object-cover object-center">
     </figure>
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">

@@ -19,7 +19,10 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center gap-5">
+                    <a href="/">
+                        <x-application-logo class="block h-8 w-8" />
+                    </a>
                     <a href="{{ route('welcome') }}" class="pointer-events-none cursor-not-allowed">
                         <img src="{{ asset('img/home/logorsu.png') }}" class="h-8 me-3" alt=" Logo" />
                     </a>

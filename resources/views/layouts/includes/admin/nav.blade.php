@@ -13,6 +13,9 @@
                         </path>
                     </svg>
                 </button>
+                <a href="/">
+                <x-application-logo class="block h-8 w-8 gap-4" />
+                </a>
                 <a href="/" class="flex ms-2 md:me-24">
                     <img src="{{ asset('img/home/logorsu.png') }}" class="h-8 me-3" alt=" Logo" />
                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Manejo
